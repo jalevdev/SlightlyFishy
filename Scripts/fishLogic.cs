@@ -12,7 +12,7 @@ public class fishLogic : MonoBehaviour
     private Vector3 startPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         //get current position
         startPosition = transform.position;
@@ -41,7 +41,7 @@ public class fishLogic : MonoBehaviour
 
     void OnEnable()
     {
-        //transform.position = startPosition;
+        transform.position = startPosition;
         SetRandomDirection();
     }
 

@@ -3,7 +3,7 @@ using TMPro;
 
 public class movement : MonoBehaviour
 {
-    [SerializeField] private float speed = 1.5f; // Speed of the player movement
+    public float speed = 1.5f; // Speed of the player movement
     [SerializeField] private Rigidbody2D rb; // Reference to the Rigidbody2D component
 
     public TMP_Text speedText;
@@ -48,25 +48,25 @@ public class movement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if collided with player
+
         if (collision.gameObject.tag == "orange")
         {
             if (speedx < 5)
             {
                 speedx += 1;
                 speedText.text = speedx + "/5";
-                speed += 1f;
+                speed = speedx - 0.5f;
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         } else if (collision.gameObject.tag == "blue")
         {
             if (speedx > 0)
             {
                 speedx -= 1;
                 speedText.text = speedx + "/5";
-                speed -= 1f;
+                speed = speedx - 0.5f;
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         } else if (collision.gameObject.tag == "green")
         {
             if (sizex < 5)
@@ -75,7 +75,7 @@ public class movement : MonoBehaviour
                 sizeText.text = sizex + "/5";
                 transform.localScale += new Vector3(0.2f, 0.2f, 0f);
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         } else if (collision.gameObject.tag == "red")
         {
             if (sizex > 0)
@@ -84,7 +84,7 @@ public class movement : MonoBehaviour
                 sizeText.text = sizex + "/5";
                 transform.localScale -= new Vector3(0.2f, 0.2f, 0f);
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         } else if (collision.gameObject.tag == "blahaj")
         {
             Debug.Log("hit blajah");

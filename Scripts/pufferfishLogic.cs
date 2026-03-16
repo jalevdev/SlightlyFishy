@@ -7,25 +7,29 @@ public class pufferfishLogic : MonoBehaviour
     public GameObject fish;
     public Sprite p1;
     public Sprite p2;
-    void Start()
+    private Coroutine animCoroutine;
+    void Awake()
     {
         fish = this.gameObject;
-        StartCoroutine(animationCoroutine());
     }
     IEnumerator animationCoroutine()
     {
-        Debug.Log("start p1");
-        fish.GetComponent<SpriteRenderer>().sprite = p1;
-        fish.transform.localScale = Vector3.one;
-        yield return new WaitForSeconds(2f);
-        Debug.Log("start p2");
-        fish.GetComponent<SpriteRenderer>().sprite = p2;
-        fish.transform.localScale = Vector3.one * 2f;
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(animationCoroutine());
+        while (true) 
+        {
+            fish.GetComponent<SpriteRenderer>().sprite = p1;
+            fish.transform.localScale = Vector3.one;
+            yield return new WaitForSeconds(2f);
+            
+            fish.GetComponent<SpriteRenderer>().sprite = p2;
+            fish.transform.localScale = Vector3.one * 2f;
+            yield return new WaitForSeconds(2f);
+        }
     }
     void OnEnable()
     {
-        StartCoroutine(animationCoroutine());
+        if (animCoroutine != null)        {
+            StopCoroutine(animCoroutine);
+        }
+        animCoroutine = StartCoroutine(animationCoroutine());
     }
 }

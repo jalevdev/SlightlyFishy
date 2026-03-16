@@ -12,7 +12,7 @@ public class blahajLogic : MonoBehaviour
     private Vector3 startPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         //get current position
         startPosition = transform.position;
@@ -44,12 +44,12 @@ public class blahajLogic : MonoBehaviour
 
     void OnEnable()
     {
-        //transform.position = startPosition;
+        transform.position = startPosition;
         SetRandomDirection();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-            SetRandomDirection();
+        SetRandomDirection();
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class cameraFollow : MonoBehaviour
 {
-    public float timeRemaining = 5;
+    public float timeRemaining = 180f;
     public bool timerIsRunning = false;
     public GameObject startScreen;
     public GameObject tutorialScreen;
@@ -29,7 +29,7 @@ public class cameraFollow : MonoBehaviour
     public GameObject menuScreen;
 
     public Rigidbody2D ffrb;
-
+    public movement movementScript;
     public GameObject[] fishes;
 
     void Start()
@@ -89,7 +89,15 @@ public class cameraFollow : MonoBehaviour
         player.transform.position = new Vector3(0, 0, 0);
         cf.Follow = ff.transform;
         //do this without stalling the whole game, maybe with a coroutine?
+        ff.transform.position = new Vector3(91.26917f, 6.75f, 0f);
         ffrb.gravityScale = 0.10f;
+        timeRemaining = 180f;
+        movementScript.speedx = 2;
+        movementScript.sizex = 2;
+        movementScript.speedText.text = movementScript.speedx + "/5";
+        movementScript.sizeText.text = movementScript.sizex + "/5";
+        movementScript.speed = movementScript.speedx - 0.5f;
+        movementScript.transform.localScale = new Vector3(1f, 1f, 1f);
         StartCoroutine(cameraFollowCoroutine0());
     }
     void backButtonClicked()
@@ -111,6 +119,11 @@ public class cameraFollow : MonoBehaviour
     }
     IEnumerator cameraFollowCoroutine()
     {
+        //enable all fish
+        foreach (GameObject fish in fishes)
+        {
+            fish.SetActive(true);
+        }
         while (Vector3.Distance(cf.transform.position, player.transform.position) > 10.1f) 
         { 
             //debug the distance
@@ -118,15 +131,9 @@ public class cameraFollow : MonoBehaviour
             yield return null; 
         }
         yield return new WaitForSeconds(1f);
-
         player.GetComponent<movement>().enabled = true;
         timerIsRunning = true;
         uiCanvasLive.enabled = true;
-        //enable all fish
-        foreach (GameObject fish in fishes)
-        {
-            fish.SetActive(true);
-        }
         
     }
 
@@ -160,6 +167,7 @@ public class cameraFollow : MonoBehaviour
         cf.Follow = startScreen.transform;
         dieText.enabled = false;
         uiCanvasLive.enabled = false;
+
     }
 
     IEnumerator winCoroutine()
