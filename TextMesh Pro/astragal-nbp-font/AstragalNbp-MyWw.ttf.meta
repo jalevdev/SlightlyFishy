@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c42a45f2ddbd51948a5dac5ec5cc2150
+guid: 2c2d406e1719af0498bc9a5fc4460761
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Lower Pixel
+  - Astragal NBP
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
